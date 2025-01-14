@@ -1,0 +1,12 @@
+{
+  "name": "frontend-architecture",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter \"./apps/shell\" dev",
+    "dev:auth": "pnpm --filter \"./apps/auth\" dev",
+    "dev:settings": "pnpm --filter \"./apps/settings\" dev",
+    "dev:dashboard": "pnpm --filter \"./apps/dashboard\" dev",
+    "build": "pnpm -r build",
+    "test": "pnpm -r test"
+  }
+}
