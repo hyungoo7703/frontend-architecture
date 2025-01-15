@@ -3,17 +3,33 @@ Vue 3와 TypeScript를 활용한 마이크로 프론트엔드 아키텍처 구�
 각 도메인별로 독립적인 마이크로 프론트엔드를 구성하고, <br>
 이를 통합하여 확장 가능하고 유지보수가 용이한 프론트엔드 아키텍처를 제시
 
-## 프로젝트 빌드 및 실행 방법
-PNPM 채택(성능과 효율성, 모노레포 지원)
+## 시작하기
+
+### 1. 저장소 클론
+```bash
+git clone https://github.com/hyungoo7703/frontend-architecture.git
+```
+
+### 2. Node.js 버전 요구사항
+Node.js >= 22.11.0 <br>
+PNPM >= 9.12.3 (성능과 효율성, 모노레포 지원을 위한 PNPM 채택)
+
+### 3. 프로젝트 빌드 및 실행 방법
+
+> #### PNPM 설치
+```bash
+# PNPM 전역 설치 (없는 경우)
+npm install -g pnpm@9.12.3
+```
 
 > #### 개발 환경 설치
-```
+```bash
 # 전체 워크스페이스 설치
 pnpm install
 ```
 
 > #### 개발 환경 실행
-```
+```bash
 # 메인 쉘 애플리케이션 실행
 pnpm run dev
 
@@ -24,7 +40,7 @@ pnpm dev:dashboard # 대시보드 앱
 ```
 
 > #### 빌드 명령어
-```
+```bash
 # 전체 워크스페이스 빌드
 pnpm build
 
@@ -106,50 +122,6 @@ frontend-architecture/
 ├── pnpm-workspace.yaml
 ```
 
-### 루트 디렉토리 주요 설정파일
-
-```json
-// package.json
-{
-  "name": "frontend-architecture",
-  "private": true,
-  "scripts": {
-    "dev": "pnpm --filter \"./apps/shell\" dev",
-    "dev:auth": "pnpm --filter \"./apps/auth\" dev",
-    "dev:dashboard": "pnpm --filter \"./apps/dashboard\" dev",
-    "dev:settings": "pnpm --filter \"./apps/settings\" dev",
-    "build": "pnpm -r build",
-    "test": "pnpm -r test"
-  }
-}
-
-// pnpm-workspace.yaml
-packages:
-  - 'apps/*'
-  - 'packages/*'
-  - 'tools/*'
-```
-> #### package.json 장점
-**효율적인 스크립트 관리**
-+ --filter 옵션으로 특정 앱만 선택적으로 실행 가능능
-+ -r 플래그로 모든 워크스페이스에 동일 명령어 일괄 실행
-
-**명확한 명령어 구조**
-+ dev 명령어로 메인 셸 앱 실행
-+ dev:* 패턴으로 각 마이크로프론트엔드 개별 실행
-+ build, test 명령어로 전체 프로젝트 빌드/테스트
-
-> #### pnpm-workspace.yaml 장점
-**모노레포 구조 정의**
-+ 워크스페이스 범위를 명확하게 정의
-+ apps와 packages 디렉토리 구조 분리
-+ 프로젝트 간 의존성 관리 용이
-
-**의존성 관리 최적화**
-+ 공통 의존성을 효율적으로 관리
-+ 중복 설치 방지로 디스크 공간 절약
-+ 패키지 간 심링크를 통한 빠른 모듈 로딩
-
 ### 프로젝트 구조 상세 및 설명
 
 > #### apps 디렉토리 (마이크로프론트엔드)
@@ -194,3 +166,46 @@ packages:
     + 단위 테스트 설정
     + E2E 테스트 설정
     + 테스트 유틸리티
+ 
+### 루트 디렉토리 주요 설정파일
+```
+// package.json
+{
+  "name": "frontend-architecture",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter \"./apps/shell\" dev",
+    "dev:auth": "pnpm --filter \"./apps/auth\" dev",
+    "dev:dashboard": "pnpm --filter \"./apps/dashboard\" dev",
+    "dev:settings": "pnpm --filter \"./apps/settings\" dev",
+    "build": "pnpm -r build",
+    "test": "pnpm -r test"
+  }
+}
+
+// pnpm-workspace.yaml
+packages:
+  - 'apps/*'
+  - 'packages/*'
+  - 'tools/*'
+```
+> #### package.json 장점
+**효율적인 스크립트 관리**
++ --filter 옵션으로 특정 앱만 선택적으로 실행 가능능
++ -r 플래그로 모든 워크스페이스에 동일 명령어 일괄 실행
+
+**명확한 명령어 구조**
++ dev 명령어로 메인 셸 앱 실행
++ dev:* 패턴으로 각 마이크로프론트엔드 개별 실행
++ build, test 명령어로 전체 프로젝트 빌드/테스트
+
+> #### pnpm-workspace.yaml 장점
+**모노레포 구조 정의**
++ 워크스페이스 범위를 명확하게 정의
++ apps와 packages 디렉토리 구조 분리
++ 프로젝트 간 의존성 관리 용이
+
+**의존성 관리 최적화**
++ 공통 의존성을 효율적으로 관리
++ 중복 설치 방지로 디스크 공간 절약
++ 패키지 간 심링크를 통한 빠른 모듈 로딩
