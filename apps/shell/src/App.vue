@@ -1,85 +1,72 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <div id="app" :class="{ 'dark-theme': isDarkTheme }">
+    <LoadingOverlay v-if="isLoading" />
+    <ErrorBoundary>
+      <router-view v-slot="{ Component }">
+        <Transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </Transition>
+      </router-view>
+    </ErrorBoundary>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
+<script setup lang="ts">
+import { computed, onMounted } from 'vue'
+import { useGlobalStore } from '@packages/utils'
+import LoadingOverlay from './components/LoadingOverlay.vue'
+import ErrorBoundary from './components/ErrorBoundary.vue'
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+const store = useGlobalStore()
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
+const isLoading = computed(() => store.isLoading)
+const isDarkTheme = computed(() => store.theme === 'dark')
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+onMounted(() => {
+  // 사용자 테마 설정 불러오기
+  const savedTheme = localStorage.getItem('theme')
+  if (savedTheme) {
+    store.setTheme(savedTheme as 'light' | 'dark')
   }
+})
+</script>
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+<style>
+#app {
+  font-family: 'Arial', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
 
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+/* 테마 변수 정의 */
+:root {
+  --primary-color: #4CAF50;
+  --background-color: #ffffff;
+  --text-color: #333333;
+}
+
+.dark-theme {
+  --primary-color: #45a049;
+  --background-color: #1a1a1a;
+  --text-color: #ffffff;
+}
+
+/* 전역 스타일 */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 </style>
