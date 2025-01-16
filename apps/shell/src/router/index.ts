@@ -9,20 +9,33 @@ const router = createRouter({
       component: MainLayout,
       children: [
         {
+          path: '',
+          name: 'home',
+          component: () => import('../views/HomeView.vue')
+        },
+        // 인증 마이크로프론트엔드로 이동
+        {
           path: 'auth',
           name: 'auth',
-          // 초기에는 빈 페이지로 설정
-          component: () => import('../views/EmptyView.vue'),
+          component: () => import('../views/EmptyView.vue')
+          // 실제 auth 앱의 메인 컴포넌트로 이동
+          // component: () => import('@apps/auth/App.vue')
         },
+        // 대시보드 마이크로프론트엔드로 이동
         {
           path: 'dashboard',
           name: 'dashboard',
           component: () => import('../views/EmptyView.vue')
+          // 실제 dashboard 앱의 메인 컴포넌트로 이동
+          // component: () => import('@apps/dashboard/App.vue')
         },
+        // 설정 마이크로프론트엔드로 이동
         {
           path: 'settings',
           name: 'settings',
           component: () => import('../views/EmptyView.vue')
+          // 실제 settings 앱의 메인 컴포넌트로 이동
+          // component: () => import('@apps/settings/App.vue')
         }
       ]
     }
