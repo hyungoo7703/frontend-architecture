@@ -139,6 +139,12 @@ importers:
 
   apps/shell:
     dependencies:
+      '@packages/shared-ui':
+        specifier: workspace:*
+        version: link:../../packages/shared-ui
+      '@packages/types':
+        specifier: workspace:*
+        version: link:../../packages/types
       '@packages/utils':
         specifier: workspace:*
         version: link:../../packages/utils
@@ -185,6 +191,18 @@ importers:
       vue-tsc:
         specifier: ^2.1.10
         version: 2.2.0(typescript@5.6.3)
+
+  packages/shared-ui:
+    dependencies:
+      vue:
+        specifier: ^3.3.4
+        version: 3.5.13(typescript@5.6.3)
+
+  packages/types:
+    dependencies:
+      typescript:
+        specifier: ^5.3.0
+        version: 5.6.3
 
   packages/utils:
     dependencies:

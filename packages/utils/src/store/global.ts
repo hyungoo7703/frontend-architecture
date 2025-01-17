@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { Theme } from '@packages/types'
 
 interface UserState {
   id: string | null
@@ -9,7 +10,7 @@ interface UserState {
 export const useGlobalStore = defineStore('global', {
   state: () => ({
     user: null as UserState | null,
-    theme: 'light',
+    theme: Theme.LIGHT,
     isLoading: false
   }),
   
@@ -18,12 +19,17 @@ export const useGlobalStore = defineStore('global', {
       this.user = user
     },
     
-    setTheme(theme: 'light' | 'dark') {
+    setTheme(theme: Theme) {
       this.theme = theme
     },
     
     setLoading(status: boolean) {
       this.isLoading = status
+    }
+  },
+  getters: {
+    isDarkTheme(): boolean {
+      return this.theme === Theme.DARK
     }
   }
 })

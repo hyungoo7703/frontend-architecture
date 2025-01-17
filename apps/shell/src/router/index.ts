@@ -36,6 +36,12 @@ const router = createRouter({
           component: () => import('../views/EmptyView.vue')
           // 실제 settings 앱의 메인 컴포넌트로 이동
           // component: () => import('@apps/settings/App.vue')
+        },
+        // 공통 UI 페이지 추가
+        {
+          path: 'components',
+          name: 'components',
+          component: () => import('../views/ComponentsView.vue')
         }
       ]
     }

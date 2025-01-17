@@ -5,16 +5,26 @@
       <p>확장 가능하고 모듈화된 프론트엔드 솔루션</p>
 
       <div class="feature-highlights">
-        <div
+        <SharedCard
           v-for="feature in features"
           :key="feature.title"
-          class="feature-card"
+          :title="feature.title"
+          :description="feature.description"
+          :icon="feature.icon"
+          variant="elevated"
+          class="custom-feature-card"
+          :clickable="true"
           @click="navigateToFeature(feature.route)"
+        />
+      </div>
+
+      <div class="components-section">
+        <SharedButton 
+          variant="secondary" 
+          @click="navigateToComponents"
         >
-          <div class="feature-icon">{{ feature.icon }}</div>
-          <h3>{{ feature.title }}</h3>
-          <p>{{ feature.description }}</p>
-        </div>
+          공통 UI 컴포넌트 보기
+        </SharedButton>
       </div>
     </div>
   </div>
@@ -22,6 +32,7 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import { SharedCard, SharedButton } from '@packages/shared-ui'
 
 const router = useRouter()
 
@@ -49,6 +60,10 @@ const features = [
 const navigateToFeature = (route: string) => {
   router.push(route)
 }
+
+const navigateToComponents = () => {
+  router.push('/components')
+}
 </script>
 
 <style scoped>
@@ -72,25 +87,26 @@ const navigateToFeature = (route: string) => {
   justify-content: center;
   gap: 2rem;
   margin-top: 2rem;
+  cursor: pointer;
 }
 
-.feature-card {
+.custom-feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem;
   background-color: var(--primary-color);
   color: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  width: 250px;
-  cursor: pointer;
-  transition: all 0.3s ease;
 }
 
-.feature-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+.custom-feature-card button {
+  margin-top: 1rem;
 }
 
-.feature-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+.components-section {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
 }
 </style>

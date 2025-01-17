@@ -14,19 +14,19 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
 import { useGlobalStore } from '@packages/utils'
+import { Theme } from '@packages/types'
 import LoadingOverlay from './components/LoadingOverlay.vue'
 import ErrorBoundary from './components/ErrorBoundary.vue'
 
 const store = useGlobalStore()
 
 const isLoading = computed(() => store.isLoading)
-const isDarkTheme = computed(() => store.theme === 'dark')
+const isDarkTheme = computed(() => store.theme === Theme.DARK)
 
 onMounted(() => {
-  // 사용자 테마 설정 불러오기
   const savedTheme = localStorage.getItem('theme')
   if (savedTheme) {
-    store.setTheme(savedTheme as 'light' | 'dark')
+    store.setTheme(savedTheme as Theme)
   }
 })
 </script>

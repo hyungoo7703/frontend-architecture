@@ -40,13 +40,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useGlobalStore } from '@packages/utils'
+import { Theme } from '@packages/types'
 
 const store = useGlobalStore()
 
 const currentTheme = computed(() => store.theme)
 
 const toggleTheme = () => {
-  const newTheme = currentTheme.value === 'light' ? 'dark' : 'light'
+  const newTheme = currentTheme.value === Theme.LIGHT ? Theme.DARK : Theme.LIGHT
   store.setTheme(newTheme)
   localStorage.setItem('theme', newTheme)
 }
