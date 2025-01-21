@@ -1,17 +1,11 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    },
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.vitest.json"
-    }
-  ],
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "module": "NodeNext"
-  }
+    "baseUrl": ".",
+    "paths": {
+      "@packages/*": ["../../packages/*/src"]
+    },
+    "types": ["cypress", "vitest", "jsdom", "@vue/test-utils"]
+  },
+  "include": ["src/**/*", "cypress.config.ts", "vitest.config.ts"]
 }
