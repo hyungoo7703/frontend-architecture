@@ -9,5 +9,11 @@
     "build": "pnpm -r build",
     "test": "pnpm -r test",
     "install:all": "pnpm install -r"
+  },
+  "pnpm": {
+    "allowedDeprecatedVersions": {
+      "abab": "2.0.6",
+      "domexception": "4.0.0"
+    }
   }
 }

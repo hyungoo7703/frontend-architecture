@@ -15,4 +15,8 @@ declare global {
   interface Window {
     __MFE_EVENT_BUS__: typeof eventBus
   }
+
+  interface WindowEventMap {
+    'mfe-loaded': CustomEvent;
+  }
 }
