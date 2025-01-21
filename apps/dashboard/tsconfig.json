@@ -5,7 +5,7 @@
     "paths": {
       "@packages/*": ["../../packages/*/src"]
     },
-    "types": ["cypress", "vitest", "jsdom", "@vue/test-utils"]
+    "types": ["cypress", "vitest", "jsdom", "@vue/test-utils", "vite/client"]
   },
   "include": ["src/**/*", "cypress.config.ts", "vitest.config.ts"]
 }
