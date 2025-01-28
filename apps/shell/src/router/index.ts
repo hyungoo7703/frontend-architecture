@@ -11,9 +11,8 @@ const loadRemoteApp = async (appName: string, port: number) => {
     try {
       const script = document.createElement('script')
       script.type = 'module'
-      const scriptPath = `/frontend-architecture/${appName}/dist/${appName}.js`
+      const scriptPath = '/frontend-architecture/dist/${appName}/${appName}.js'
       script.src = scriptPath
-      console.log('Loading script from:', scriptPath) // 디버깅용 로그 추가
       await new Promise((resolve, reject) => {
         script.onload = () => {
           console.log(`${appName} script loaded successfully`) // 성공 로그
