@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div id="dashboard-container">
     <div class="development-notice">
       <div class="notice-icon">🚧</div>
       <h1>{{ appName }} 개발 진행 중</h1>
@@ -18,7 +18,7 @@ const appName = '대시보드'
 </script>
 
 <style scoped>
-.app-container {
+#dashboard-container {
   display: flex;
   justify-content: center;
   align-items: center;

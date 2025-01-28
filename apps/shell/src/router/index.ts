@@ -5,7 +5,6 @@ const isDev = process.env.NODE_ENV === 'development'
 
 const loadRemoteApp = async (appName: string, port: number) => {
   if (isDev) {
-    console.log(`Loading ${appName} app in dev mode`)
     window.open(`http://localhost:${port}`, '_blank')
     return false
   } else {
@@ -30,7 +29,6 @@ const createMfeContainer = (appName: string) => ({
   template: `<div id="${appName}-container"></div>`,
   mounted() {
     if (!isDev) {
-      console.log(`${appName} container mounted`)
       window.dispatchEvent(new CustomEvent(`${appName}-loaded`))
     }
   }

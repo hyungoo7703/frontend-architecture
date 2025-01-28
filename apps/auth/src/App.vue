@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div id="auth-container">
     <div class="development-notice">
       <div class="notice-icon">🚧</div>
       <h1>{{ appName }} 개발 진행 중</h1>
@@ -18,7 +18,7 @@ const appName = '인증 시스템'
 </script>
 
 <style scoped>
-.app-container {
+#auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
