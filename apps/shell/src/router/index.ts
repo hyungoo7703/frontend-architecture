@@ -11,8 +11,7 @@ const loadRemoteApp = async (appName: string, port: number) => {
     try {
       const script = document.createElement('script')
       script.type = 'module'
-      const scriptPath = '/frontend-architecture/dist/${appName}/${appName}.js'
-      script.src = scriptPath
+      script.src = `/frontend-architecture/dist/${appName}/${appName}.js`
       await new Promise((resolve, reject) => {
         script.onload = () => {
           console.log(`${appName} script loaded successfully`) // 성공 로그
