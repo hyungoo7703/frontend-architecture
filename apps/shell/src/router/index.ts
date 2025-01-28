@@ -11,14 +11,16 @@ const loadRemoteApp = async (appName: string, port: number) => {
     try {
       const script = document.createElement('script')
       script.type = 'module'
-      script.src = `/frontend-architecture/dist/${appName}/${appName}.js`
+      // 상대 경로
+      script.src = `dist/${appName}/${appName}.js`
+      // 또는 전체 경로
+      // script.src = `https://hyungoo7703.github.io/frontend-architecture/dist/${appName}/${appName}.js`
+      
       await new Promise((resolve, reject) => {
         script.onload = () => {
-          console.log(`${appName} script loaded successfully`) // 성공 로그
           resolve(null)
         }
         script.onerror = (error) => {
-          console.error(`Error loading ${appName} script:`, error) // 에러 상세 로그
           reject(error)
         }
         document.head.appendChild(script)
@@ -30,12 +32,12 @@ const loadRemoteApp = async (appName: string, port: number) => {
   }
 }
 
+
 // 마이크로프론트엔드 컨테이너 컴포넌트 생성 함수
 const createMfeContainer = (appName: string) => ({
   template: `<div id="${appName}-container"></div>`,
   mounted() {
     if (!isDev) {
-      console.log(`${appName} container mounted`)
       window.dispatchEvent(new CustomEvent(`${appName}-loaded`))
     }
   }
