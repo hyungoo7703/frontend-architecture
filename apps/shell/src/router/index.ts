@@ -11,36 +11,36 @@ const loadRemoteApp = async (appName: string, port: number) => {
     try {
       const script = document.createElement('script')
       script.type = 'module'
-      // 상대 경로
-      script.src = `dist/${appName}/${appName}.js`
-      // 또는 전체 경로
-      // script.src = `https://hyungoo7703.github.io/frontend-architecture/dist/${appName}/${appName}.js`
+      // GitHub Pages의 정확한 경로 사용
+      script.src = `https://hyungoo7703.github.io/frontend-architecture/dist/${appName}/assets/${appName}.js`
+      
+      console.log(`Loading ${appName} from: ${script.src}`)
       
       await new Promise((resolve, reject) => {
         script.onload = () => {
+          console.log(`${appName} script loaded successfully`)
           resolve(null)
         }
         script.onerror = (error) => {
+          console.error(`Error loading ${appName} script:`, error)
           reject(error)
         }
         document.head.appendChild(script)
       })
-      window.dispatchEvent(new CustomEvent(`${appName}-loaded`))
+      
+      // 스크립트 로드 후 이벤트 발생
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent(`${appName}-loaded`))
+      }, 100)
     } catch (error) {
       console.error(`Failed to load ${appName} app:`, error)
     }
   }
 }
 
-
 // 마이크로프론트엔드 컨테이너 컴포넌트 생성 함수
 const createMfeContainer = (appName: string) => ({
-  template: `<div id="${appName}-container"></div>`,
-  mounted() {
-    if (!isDev) {
-      window.dispatchEvent(new CustomEvent(`${appName}-loaded`))
-    }
-  }
+  template: `<div id="${appName}-container"></div>`
 })
 
 const router = createRouter({
