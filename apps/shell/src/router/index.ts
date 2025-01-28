@@ -11,10 +11,18 @@ const loadRemoteApp = async (appName: string, port: number) => {
     try {
       const script = document.createElement('script')
       script.type = 'module'
-      script.src = `/frontend-architecture/${appName}/dist/${appName}.js`
+      const scriptPath = `/frontend-architecture/${appName}/dist/${appName}.js`
+      script.src = scriptPath
+      console.log('Loading script from:', scriptPath) // 디버깅용 로그 추가
       await new Promise((resolve, reject) => {
-        script.onload = resolve
-        script.onerror = reject
+        script.onload = () => {
+          console.log(`${appName} script loaded successfully`) // 성공 로그
+          resolve(null)
+        }
+        script.onerror = (error) => {
+          console.error(`Error loading ${appName} script:`, error) // 에러 상세 로그
+          reject(error)
+        }
         document.head.appendChild(script)
       })
       window.dispatchEvent(new CustomEvent(`${appName}-loaded`))
@@ -29,6 +37,7 @@ const createMfeContainer = (appName: string) => ({
   template: `<div id="${appName}-container"></div>`,
   mounted() {
     if (!isDev) {
+      console.log(`${appName} container mounted`)
       window.dispatchEvent(new CustomEvent(`${appName}-loaded`))
     }
   }
