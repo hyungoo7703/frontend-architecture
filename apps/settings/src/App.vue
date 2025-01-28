@@ -1,85 +1,67 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+  <div class="app-container">
+    <div class="development-notice">
+      <div class="notice-icon">🚧</div>
+      <h1>{{ appName }} 개발 진행 중</h1>
+      <p>현재 이 페이지는 개발 중입니다.</p>
+      <div class="tech-stack">
+        <span>Vue 3</span>
+        <span>TypeScript</span>
+        <span>Micro Frontend</span>
+      </div>
     </div>
-  </header>
-
-  <RouterView />
+  </div>
 </template>
 
+<script setup lang="ts">
+const appName = '설정'
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  padding: 2rem;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
+.development-notice {
   text-align: center;
-  margin-top: 2rem;
+  padding: 3rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.notice-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--text-color);
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+p {
+  color: var(--text-color-secondary);
+  margin-bottom: 2rem;
 }
 
-nav a:first-of-type {
-  border: 0;
+.tech-stack {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.tech-stack span {
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.9rem;
 }
 </style>

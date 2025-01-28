@@ -5,19 +5,19 @@
 </template>
 
 <script setup lang="ts">
-type IconSize = "small" | "medium" | "large";
-type IconColor = "primary" | "secondary" | "danger";
+type IconSize = "small" | "medium" | "large"
+type IconColor = "primary" | "secondary" | "danger"
 
 interface Props {
-  name: string;
-  size?: IconSize;
-  color?: IconColor;
+  name: string
+  size?: IconSize
+  color?: IconColor
 }
 
 const props = withDefaults(defineProps<Props>(), {
   size: "medium",
   color: "primary",
-});
+})
 </script>
 
 <style scoped>

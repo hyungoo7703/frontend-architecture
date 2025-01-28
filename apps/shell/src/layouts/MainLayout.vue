@@ -2,23 +2,26 @@
   <div class="layout-container">
     <header class="header">
       <nav class="nav">
-        <router-link to="/">Home</router-link>
-        <router-link to="/auth">Auth</router-link>
-        <router-link to="/dashboard">Dashboard</router-link>
-        <router-link to="/settings">Settings</router-link>
+        <div class="nav-links">
+          <router-link 
+            v-for="route in routes" 
+            :key="route.path"
+            :to="route.path"
+            class="nav-link"
+            active-class="nav-link-active"
+          >
+            {{ route.name }}
+          </router-link>
+        </div>
         
         <div class="theme-switch">
-          <label class="switch">
-            <input 
-              type="checkbox" 
-              :checked="currentTheme === 'dark'"
-              @change="toggleTheme"
-            >
-            <span class="slider round">
-              <span class="icon light">☀️</span>
-              <span class="icon dark">🌙</span>
-            </span>
-          </label>
+          <button 
+            class="theme-button"
+            @click="toggleTheme"
+            :title="currentTheme === 'dark' ? '라이트 모드로 전환' : '다크 모드로 전환'"
+          >
+            <span class="theme-icon">{{ currentTheme === 'dark' ? '☀️' : '🌙' }}</span>
+          </button>
         </div>
       </nav>
     </header>
@@ -44,12 +47,20 @@ import { Theme } from '@packages/types'
 
 const store = useGlobalStore()
 
+const routes = [
+  { path: '/', name: 'Home' },
+  // { path: '/auth', name: 'Auth' },
+  // { path: '/dashboard', name: 'Dashboard' },
+  // { path: '/settings', name: 'Settings' }
+]
+
 const currentTheme = computed(() => store.theme)
 
 const toggleTheme = () => {
   const newTheme = currentTheme.value === Theme.LIGHT ? Theme.DARK : Theme.LIGHT
   store.setTheme(newTheme)
   localStorage.setItem('theme', newTheme)
+  document.documentElement.setAttribute('data-theme', newTheme)
 }
 </script>
 
@@ -58,90 +69,83 @@ const toggleTheme = () => {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .header {
-  padding: 1rem;
+  padding: 1rem 2rem;
   background: var(--primary-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .nav {
   display: flex;
-  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.theme-switch {
-  margin-left: auto;
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: var(--text-color-light);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link-active {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.theme-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
 }
 
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
+.theme-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: .4s;
-}
-
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round::before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: .4s;
-  border-radius: 50%;
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:checked + .slider::before {
-  transform: translateX(26px);
-}
-
-.icon {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 16px;
-}
-
-.icon.light {
-  right: 6px;
-}
-
-.icon.dark {
-  left: 6px;
+.theme-icon {
+  font-size: 1.2rem;
 }
 
 .main-content {
   flex: 1;
   padding: 2rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.footer {
+  padding: 1rem;
+  text-align: center;
+  background-color: var(--primary-color);
+  color: var(--text-color-light);
 }
 
 .fade-enter-active,

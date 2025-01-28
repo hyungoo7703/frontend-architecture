@@ -1,18 +1,36 @@
-import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import vueDevTools from 'vite-plugin-vue-devtools'
+import path from 'path'
 
-// https://vite.dev/config/
+const isDev = process.env.NODE_ENV === 'development'
+
 export default defineConfig({
-  plugins: [
-    vue(),
-    vueDevTools(),
-  ],
+  base: isDev ? '/' : '/frontend-architecture/dashboard/',
+  plugins: [vue()],
+  build: {
+    lib: {
+      entry: path.resolve(__dirname, 'src/main.ts'),
+      name: 'DashboardApp',
+      fileName: 'dashboard'
+    },
+    rollupOptions: {
+      external: ['vue'],
+      output: {
+        globals: {
+          vue: 'Vue'
+        }
+      }
+    }
+  },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    },
+      '@': path.resolve(__dirname, './src'),
+      '@apps': path.resolve(__dirname, '../../apps'),
+      '@packages': path.resolve(__dirname, '../../packages')
+    }
   },
+  server: {
+    port: 5002,
+    cors: true
+  }
 })

@@ -11,33 +11,33 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-type ButtonVariant = "primary" | "secondary" | "danger";
-type ButtonSize = "small" | "medium" | "large";
+type ButtonVariant = "primary" | "secondary" | "danger"
+type ButtonSize = "small" | "medium" | "large"
 
 interface Props {
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  disabled?: boolean;
+  variant?: ButtonVariant
+  size?: ButtonSize
+  disabled?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   variant: "primary",
   size: "medium",
   disabled: false,
-});
+})
 
 const emit = defineEmits<{
-  (e: "click", event: MouseEvent): void;
-}>();
+  (e: "click", event: MouseEvent): void
+}>()
 
-const variantClass = computed(() => `btn-${props.variant}`);
-const sizeClass = computed(() => `btn-${props.size}`);
+const variantClass = computed(() => `btn-${props.variant}`)
+const sizeClass = computed(() => `btn-${props.size}`)
 
 const handleClick = (event: MouseEvent) => {
   if (!props.disabled) {
-    emit("click", event);
+    emit("click", event)
   }
-};
+}
 </script>
 
 <style scoped>

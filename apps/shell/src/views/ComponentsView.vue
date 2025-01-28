@@ -1,5 +1,15 @@
 <template>
   <div class="components-container">
+    <div class="home-button-container">
+      <SharedButton 
+        variant="secondary"
+        size="medium"
+        @click="navigateToHome"
+        class="home-button"
+      >
+        홈으로 돌아가기
+      </SharedButton>
+    </div>
     <h1>공통 UI 컴포넌트</h1>
 
     <section class="component-section">
@@ -24,6 +34,8 @@
       <div class="component-props">
         <h3>Props</h3>
         <SharedTable :columns="propsColumns" :data="cardPropsData" />
+        <h3>Slots</h3>
+        <SharedTable :columns="slotColumns" :data="cardSlotData" />
       </div>
     </section>
 
@@ -74,13 +86,23 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { SharedButton, SharedCard, SharedIcon, SharedTable } from '@packages/shared-ui'
 
+const router = useRouter()
+
+// 공통 프롭스 컬럼
 const propsColumns = [
   { key: 'prop', label: '속성', sortable: true },
   { key: 'type', label: '타입' },
   { key: 'default', label: '기본값' },
   { key: 'description', label: '설명' },
+]
+
+// 공통 슬럿 컬럼
+const slotColumns = [
+  { key: 'name', label: '슬롯명', sortable: true },
+  { key: 'description', label: '설명' }
 ]
 
 const buttonPropsData = [
@@ -129,6 +151,22 @@ const cardPropsData = [
     default: 'false',
     description: '클릭 가능 여부',
   },
+]
+
+// 카드 슬럿 데이터
+const cardSlotData = [
+  {
+    name: 'icon',
+    description: '카드 상단에 표시될 아이콘 영역'
+  },
+  {
+    name: 'default',
+    description: '카드 본문 영역의 추가 컨텐츠'
+  },
+  {
+    name: 'footer',
+    description: '카드 하단 영역의 추가 컨텐츠'
+  }
 ]
 
 const iconPropsData = [
@@ -206,6 +244,10 @@ const tableData = [
 
 const showScrollButton = ref(false)
 
+const navigateToHome = () => {
+  router.push('/')
+}
+
 const handleScroll = () => {
   showScrollButton.value = window.scrollY > 300
 }
@@ -231,6 +273,23 @@ onUnmounted(() => {
   padding: 2rem;
   background-color: var(--background-color);
   color: var(--text-color);
+}
+
+.home-button-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 2rem;
+}
+
+.home-button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 2px solid var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+.home-button:hover {
+  transform: translateX(-5px);
 }
 
 .component-section {

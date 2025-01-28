@@ -58,36 +58,36 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed } from "vue"
 
 interface Column {
-  key: string;
-  label: string;
-  sortable?: boolean;
+  key: string
+  label: string
+  sortable?: boolean
 }
 
 interface Props {
-  columns: Column[];
-  data: any[];
-  searchable?: boolean;
-  pageable?: boolean;
-  itemsPerPage?: number;
+  columns: Column[]
+  data: any[]
+  searchable?: boolean
+  pageable?: boolean
+  itemsPerPage?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
   searchable: false,
   pageable: false,
   itemsPerPage: 10,
-});
+})
 
-const searchQuery = ref("");
-const sortKey = ref("");
-const sortOrder = ref<"asc" | "desc">("asc");
-const currentPage = ref(1);
+const searchQuery = ref("")
+const sortKey = ref("")
+const sortOrder = ref<"asc" | "desc">("asc")
+const currentPage = ref(1)
 
 // 검색 및 정렬 로직
 const filteredData = computed(() => {
-  let result = [...props.data];
+  let result = [...props.data]
 
   // 검색
   if (searchQuery.value) {
@@ -95,45 +95,45 @@ const filteredData = computed(() => {
       Object.values(item).some((val) =>
         String(val).toLowerCase().includes(searchQuery.value.toLowerCase())
       )
-    );
+    )
   }
 
   // 정렬
   if (sortKey.value) {
     result.sort((a, b) => {
-      const aVal = a[sortKey.value];
-      const bVal = b[sortKey.value];
+      const aVal = a[sortKey.value]
+      const bVal = b[sortKey.value]
       return sortOrder.value === "asc"
         ? aVal > bVal
           ? 1
           : -1
         : aVal < bVal
           ? 1
-          : -1;
-    });
+          : -1
+    })
   }
 
   // 페이지네이션
   if (props.pageable) {
-    const start = (currentPage.value - 1) * props.itemsPerPage;
-    return result.slice(start, start + props.itemsPerPage);
+    const start = (currentPage.value - 1) * props.itemsPerPage
+    return result.slice(start, start + props.itemsPerPage)
   }
 
-  return result;
-});
+  return result
+})
 
 const totalPages = computed(() =>
   Math.ceil(props.data.length / props.itemsPerPage)
-);
+)
 
 const handleSort = (key: string) => {
   if (sortKey.value === key) {
-    sortOrder.value = sortOrder.value === "asc" ? "desc" : "asc";
+    sortOrder.value = sortOrder.value === "asc" ? "desc" : "asc"
   } else {
-    sortKey.value = key;
-    sortOrder.value = "asc";
+    sortKey.value = key
+    sortOrder.value = "asc"
   }
-};
+}
 </script>
 
 <style scoped>

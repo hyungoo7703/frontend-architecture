@@ -2,10 +2,11 @@
   "name": "frontend-architecture",
   "private": true,
   "scripts": {
-    "dev": "pnpm --filter \"./apps/shell\" dev",
-    "dev:auth": "pnpm --filter \"./apps/auth\" dev",
-    "dev:settings": "pnpm --filter \"./apps/settings\" dev",
-    "dev:dashboard": "pnpm --filter \"./apps/dashboard\" dev",
+    "dev": "pnpm -r --parallel dev",
+    "dev:auth": "pnpm --filter @apps/auth dev",
+    "dev:dashboard": "pnpm --filter @apps/dashboard dev",
+    "dev:settings": "pnpm --filter @apps/settings dev",
+    "dev:shell": "pnpm --filter @apps/shell dev",
     "build": "pnpm -r build",
     "test": "pnpm -r test",
     "install:all": "pnpm install -r"
