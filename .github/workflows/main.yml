@@ -58,9 +58,12 @@ jobs:
         run: |
           mkdir -p dist/assets
           cp -r apps/shell/dist/assets/* dist/assets/
-          mkdir -p dist/auth && cp apps/auth/dist/auth.js dist/auth/
-          mkdir -p dist/dashboard && cp apps/dashboard/dist/dashboard.js dist/dashboard/
-          mkdir -p dist/settings && cp apps/settings/dist/settings.js dist/settings/
+          mkdir -p dist/auth
+          cp apps/auth/dist/auth.js dist/auth/
+          mkdir -p dist/dashboard
+          cp apps/dashboard/dist/dashboard.js dist/dashboard/
+          mkdir -p dist/settings
+          cp apps/settings/dist/settings.js dist/settings/
           cp apps/shell/dist/index.html dist/
           cp apps/shell/dist/404.html dist/
 
