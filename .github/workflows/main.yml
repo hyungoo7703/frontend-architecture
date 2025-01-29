@@ -47,7 +47,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
         
-      - name: Build all apps
+      - name: Build apps
         run: |
           pnpm build:auth
           pnpm build:dashboard
@@ -56,11 +56,13 @@ jobs:
 
       - name: Prepare dist directory
         run: |
-          mkdir -p dist
-          cp -r apps/auth/dist dist/auth
-          cp -r apps/dashboard/dist dist/dashboard
-          cp -r apps/settings/dist dist/settings
-          cp -r apps/shell/dist/* dist/
+          mkdir -p dist/assets
+          cp -r apps/shell/dist/assets/* dist/assets/
+          mkdir -p dist/auth && cp apps/auth/dist/auth.js dist/auth/
+          mkdir -p dist/dashboard && cp apps/dashboard/dist/dashboard.js dist/dashboard/
+          mkdir -p dist/settings && cp apps/settings/dist/settings.js dist/settings/
+          cp apps/shell/dist/index.html dist/
+          cp apps/shell/dist/404.html dist/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2

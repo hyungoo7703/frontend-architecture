@@ -9,21 +9,18 @@ export default defineConfig({
   base: isDev ? '/' : '/frontend-architecture/',
   plugins: [vue()],
   build: {
-    outDir: isDev ? 'dist' : `dist/${appName}`,
+    outDir: 'dist',
     lib: {
       entry: path.resolve(__dirname, 'src/main.ts'),
       name: 'SettingsApp',
-      fileName: (format) => `${appName}.${format}.js`
+      fileName: () => 'settings.js'
     },
     rollupOptions: {
       external: ['vue'],
       output: {
         globals: {
           vue: 'Vue'
-        },
-        entryFileNames: 'settings.js',
-        chunkFileNames: '[name].js',
-        assetFileNames: '[name].[ext]'
+        }
       }
     }
   },
@@ -37,7 +34,6 @@ export default defineConfig({
   server: {
     port: 5003,
     cors: true,
-    host: true,
-    strictPort: true 
+    host: true
   }
 })

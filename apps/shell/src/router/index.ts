@@ -10,14 +10,17 @@ const loadRemoteApp = async (appName: string, port: number) => {
   } else {
     try {
       const script = document.createElement('script')
+      script.type = 'module'
+
       // 각 앱별 경로 설정
       const scriptPath = {
         auth: `/frontend-architecture/auth/auth.js`,
         dashboard: `/frontend-architecture/dashboard/dashboard.js`,
         settings: `/frontend-architecture/settings/settings.js`
       }[appName] as string
+      
       script.src = scriptPath
-
+      
       await new Promise((resolve, reject) => {
         script.onload = () => {
           resolve(null)
@@ -28,11 +31,7 @@ const loadRemoteApp = async (appName: string, port: number) => {
         }
         document.head.appendChild(script)
       })
-      
-      // 스크립트 로드 후 이벤트 발생
-      setTimeout(() => {
-        window.dispatchEvent(new CustomEvent(`${appName}-loaded`))
-      }, 100)
+      window.dispatchEvent(new CustomEvent(`${appName}-loaded`))
     } catch (error) {
       console.error(`Failed to load ${appName} app:`, error)
     }

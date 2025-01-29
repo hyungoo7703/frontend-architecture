@@ -9,21 +9,18 @@ export default defineConfig({
   base: isDev ? '/' : '/frontend-architecture/',
   plugins: [vue()],
   build: {
-    outDir: isDev ? 'dist' : `dist/${appName}`,
+    outDir: 'dist',
     lib: {
       entry: path.resolve(__dirname, 'src/main.ts'),
       name: 'DashboardApp',
-      fileName: (format) => `${appName}.${format}.js`
+      fileName: () => 'dashboard.js'
     },
     rollupOptions: {
       external: ['vue'],
       output: {
         globals: {
           vue: 'Vue'
-        },
-        entryFileNames: 'dashboard.js',
-        chunkFileNames: '[name].js',
-        assetFileNames: '[name].[ext]'
+        }
       }
     }
   },
@@ -37,7 +34,6 @@ export default defineConfig({
   server: {
     port: 5002,
     cors: true,
-    host: true,
-    strictPort: true
+    host: true
   }
 })
