@@ -8,33 +8,35 @@ const loadRemoteApp = async (appName: string, port: number) => {
     window.open(`http://localhost:${port}`, '_blank')
     return false
   } else {
-    try {
-      const script = document.createElement('script')
-      script.type = 'module'
+    window.open(`https://hyungoo7703.github.io/frontend-architecture/${appName}`, '_blank')
+    return false
+    // try {
+    //   const script = document.createElement('script')
+    //   script.type = 'module'
 
-      //각 앱 별로 경로설정(실제 Github Pages 경로)
-      const scriptPath = {
-        auth: `https://hyungoo7703.github.io/frontend-architecture/auth/auth.js`,
-        dashboard: `https://hyungoo7703.github.io/frontend-architecture/dashboard/dashboard.js`,
-        settings: `https://hyungoo7703.github.io/frontend-architecture/settings/settings.js`
-      }[appName] as string
+    //   //각 앱 별로 경로설정(실제 Github Pages 경로)
+    //   const scriptPath = {
+    //     auth: `https://hyungoo7703.github.io/frontend-architecture/auth/auth.js`,
+    //     dashboard: `https://hyungoo7703.github.io/frontend-architecture/dashboard/dashboard.js`,
+    //     settings: `https://hyungoo7703.github.io/frontend-architecture/settings/settings.js`
+    //   }[appName] as string
       
-      script.src = scriptPath
+    //   script.src = scriptPath
       
-      await new Promise((resolve, reject) => {
-        script.onload = () => {
-          resolve(null)
-        }
-        script.onerror = (error) => {
-          console.error(`Error loading ${appName} script:`, error)
-          reject(error)
-        }
-        document.head.appendChild(script)
-      })
-      window.dispatchEvent(new CustomEvent(`${appName}-loaded`))
-    } catch (error) {
-      console.error(`Failed to load ${appName} app:`, error)
-    }
+    //   await new Promise((resolve, reject) => {
+    //     script.onload = () => {
+    //       resolve(null)
+    //     }
+    //     script.onerror = (error) => {
+    //       console.error(`Error loading ${appName} script:`, error)
+    //       reject(error)
+    //     }
+    //     document.head.appendChild(script)
+    //   })
+    //   window.dispatchEvent(new CustomEvent(`${appName}-loaded`))
+    // } catch (error) {
+    //   console.error(`Failed to load ${appName} app:`, error)
+    // }
   }
 }
 
