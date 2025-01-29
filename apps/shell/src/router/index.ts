@@ -12,11 +12,11 @@ const loadRemoteApp = async (appName: string, port: number) => {
       const script = document.createElement('script')
       script.type = 'module'
 
-      // 각 앱별 경로 설정
+      //각 앱 별로 경로설정(실제 Github Pages 경로)
       const scriptPath = {
-        auth: `/frontend-architecture/auth/auth.js`,
-        dashboard: `/frontend-architecture/dashboard/dashboard.js`,
-        settings: `/frontend-architecture/settings/settings.js`
+        auth: `https://hyungoo7703.github.io/frontend-architecture/auth/auth.js`,
+        dashboard: `https://hyungoo7703.github.io/frontend-architecture/dashboard/dashboard.js`,
+        settings: `https://hyungoo7703.github.io/frontend-architecture/settings/settings.js`
       }[appName] as string
       
       script.src = scriptPath
