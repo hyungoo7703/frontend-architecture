@@ -47,16 +47,25 @@ jobs:
       - name: Install dependencies
         run: pnpm install
         
-      - name: Build
-        run: pnpm build
-        
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-        
+      - name: Build all apps
+        run: |
+          pnpm build:auth
+          pnpm build:dashboard
+          pnpm build:settings
+          pnpm build:shell
+
+      - name: Prepare dist directory
+        run: |
+          mkdir -p dist
+          cp -r apps/auth/dist dist/auth
+          cp -r apps/dashboard/dist dist/dashboard
+          cp -r apps/settings/dist dist/settings
+          cp -r apps/shell/dist/* dist/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: './apps/shell/dist'
+          path: './dist'
           
       - name: Deploy to GitHub Pages
         id: deployment
