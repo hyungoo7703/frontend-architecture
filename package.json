@@ -8,6 +8,10 @@
     "dev:settings": "pnpm --filter @apps/settings dev",
     "dev:shell": "pnpm --filter @apps/shell dev",
     "build": "pnpm -r build",
+    "build:auth": "pnpm --filter @apps/auth build",
+    "build:dashboard": "pnpm --filter @apps/dashboard build",
+    "build:settings": "pnpm --filter @apps/settings build",
+    "build:shell": "pnpm --filter @apps/shell build",
     "test": "pnpm -r test",
     "install:all": "pnpm install -r"
   },
