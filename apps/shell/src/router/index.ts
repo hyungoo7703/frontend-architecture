@@ -10,15 +10,16 @@ const loadRemoteApp = async (appName: string, port: number) => {
   } else {
     try {
       const script = document.createElement('script')
-      script.type = 'module'
-      // GitHub Pages의 정확한 경로 사용
-      script.src = `https://hyungoo7703.github.io/frontend-architecture/dist/${appName}/assets/${appName}.js`
-      
-      console.log(`Loading ${appName} from: ${script.src}`)
-      
+      // 각 앱별 경로 설정
+      const scriptPath = {
+        auth: `/frontend-architecture/auth/auth.js`,
+        dashboard: `/frontend-architecture/dashboard/dashboard.js`,
+        settings: `/frontend-architecture/settings/settings.js`
+      }[appName] as string
+      script.src = scriptPath
+
       await new Promise((resolve, reject) => {
         script.onload = () => {
-          console.log(`${appName} script loaded successfully`)
           resolve(null)
         }
         script.onerror = (error) => {
