@@ -4,10 +4,6 @@
 [![Vue.js](https://img.shields.io/badge/Vue.js-3.5.13-brightgreen)](https://vuejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.1-blue)](https://www.typescriptlang.org/)
 
-## 📌 프로젝트 배포(GitHub Pages)
-
-### 배포 ☞ [https://hyungoo7703.github.io/frontend-architecture/](https://hyungoo7703.github.io/frontend-architecture/)
-
 ## 📌 시작하기
 
 ### 1. 저장소 클론
