@@ -1,6 +1,7 @@
 # 🚀 frontend-architecture
 **마이크로 프론트엔드 아키텍처 구현 프로젝트** <br>
-**각 도메인별로 독립적인 마이크로 프론트엔드를 구성하고, 이를 통합하여 확장 가능하고 유지보수가 용이한 프론트엔드 아키텍처를 제시**  
+**각 도메인별로 독립적인 마이크로 프론트엔드를 구성하고, <br> 
+이를 통합하여 확장 가능하고 유지보수가 용이한 프론트엔드 아키텍처를 제시**  
 [![Vue.js](https://img.shields.io/badge/Vue.js-3.5.13-brightgreen)](https://vuejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.1-blue)](https://www.typescriptlang.org/)
 
