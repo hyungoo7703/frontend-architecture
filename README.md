@@ -1,13 +1,14 @@
-# frontend-architecture
-Vue 3와 TypeScript를 활용한 마이크로 프론트엔드 아키텍처 구현 프로젝트 <br>
-각 도메인별로 독립적인 마이크로 프론트엔드를 구성하고, <br>
-이를 통합하여 확장 가능하고 유지보수가 용이한 프론트엔드 아키텍처를 제시
+# 🚀 frontend-architecture
+**마이크로 프론트엔드 아키텍처 구현 프로젝트** <br>
+**각 도메인별로 독립적인 마이크로 프론트엔드를 구성하고, 이를 통합하여 확장 가능하고 유지보수가 용이한 프론트엔드 아키텍처를 제시**  
+[![Vue.js](https://img.shields.io/badge/Vue.js-3.5.13-brightgreen)](https://vuejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.1-blue)](https://www.typescriptlang.org/)
 
-> ### 배포 링크 ☞ [https://hyungoo7703.github.io/frontend-architecture/](https://hyungoo7703.github.io/frontend-architecture/)
-Github Actions를 이용하여 commit시 마다 자동배포되도록 설정. <br>
-점진적 기능 추가, Issue사항들 진행할 예정.
+## 📌 프로젝트 배포(GitHub Pages)
 
-## 시작하기
+### 배포 ☞ [https://hyungoo7703.github.io/frontend-architecture/](https://hyungoo7703.github.io/frontend-architecture/)
+
+## 📌 시작하기
 
 ### 1. 저장소 클론
 ```bash
@@ -56,7 +57,7 @@ pnpm build
 pnpm test
 ```
 
-## 프로젝트 기획 의도
+## 📌 프로젝트 기획 의도
 
 ### 기본 마이크로프론트엔드 구조 확립
 + Vue 3와 TypeScript 기반의 안정적인 마이크로프론트엔드 아키텍처 구현해보기
@@ -70,7 +71,7 @@ pnpm test
 + 모듈화된 구조를 통한 코드 관리 용이성 확보
 + 명확한 개발 가이드라인과 문서화를 통한 코드 품질 유지
 
-## 넣고자 하는 기능
+## 📌 넣고자 하는 기능
 
 ### 필수 기능 (1단계)
 + 마이크로프론트엔드 간 기본 라우팅 시스템
@@ -84,23 +85,10 @@ pnpm test
 + 기본적인 테스트 환경 구축
 + 개발 가이드라인 작성
 
-## 프로젝트 기술 선택
+## 📌 코드 작성방향
++ 프로젝트 기획 의도를 최대한 신경써서 코드를 작성해보자.
 
-> #### 프레임워크 & 언어
-+ Vue 3: 컴포넌트 기반 프레임워크
-+ TypeScript: 정적 타입 지원
-+ Pinia: 상태 관리
-+ Vue Router: 라우팅 시스템
-
-> #### 개발 도구
-+ Vite: 빌드 도구
-+ ESLint & Prettier: 코드 품질 관리
-+ Jest: 유닛 테스트
-+ Cypress: E2E 테스트
-
------
-
-## 프로젝트 구조
+## 📌 프로젝트 구조
 모노레포 구조 채택
 
 모노레포(Monorepo)는 여러 프로젝트의 코드를 하나의 저장소에서 관리하는 개발 전략
@@ -185,3 +173,5 @@ packages:
 + 워크스페이스 범위를 명확하게 정의
 + apps와 packages 디렉토리 구조 분리
 + 프로젝트 간 의존성 관리 용이
+
+## 📌 프로젝트 하이라이트(작성중)
