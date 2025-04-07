@@ -2,8 +2,8 @@
   <div id="settings-container">
     <div class="development-notice">
       <div class="notice-icon">🚧</div>
-      <h1>{{ appName }} 개발 진행 중</h1>
-      <p>현재 이 페이지는 개발 중입니다.</p>
+      <h1>{{ appName }}</h1>
+      <p>모듈화된 페이지로서 settings 관련 프로젝트입니다.</p>
       <div class="tech-stack">
         <span>Vue 3</span>
         <span>TypeScript</span>
