@@ -1,47 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { h } from 'vue'
 import MainLayout from '../layouts/MainLayout.vue'
 
 const isDev = process.env.NODE_ENV === 'development'
 
-const loadRemoteApp = async (appName: string, port: number) => {
-  if (isDev) {
-    window.open(`http://localhost:${port}`, '_blank')
-    return false
-  } else {
-    try {
-      const script = document.createElement('script')
-      script.type = 'module'
+// 마이크로프론트엔드 컨테이너 컴포넌트 생성 함수
+const createMfeContainer = (appName: string, port: number) => {
+  const devSrc = `http://localhost:${port}`
+  // GitHub Pages 배포 경로에 맞게 수정
+  const prodSrc = `/frontend-architecture/${appName}/`
 
-      //각 앱 별로 경로설정(실제 Github Pages 경로)
-      const scriptPath = {
-        auth: `https://hyungoo7703.github.io/frontend-architecture/auth/auth.js`,
-        dashboard: `https://hyungoo7703.github.io/frontend-architecture/dashboard/dashboard.js`,
-        settings: `https://hyungoo7703.github.io/frontend-architecture/settings/settings.js`
-      }[appName] as string
-      
-      script.src = scriptPath
-      
-      await new Promise((resolve, reject) => {
-        script.onload = () => {
-          resolve(null)
-        }
-        script.onerror = (error) => {
-          console.error(`Error loading ${appName} script:`, error)
-          reject(error)
-        }
-        document.head.appendChild(script)
+  return {
+    render() {
+      return h('iframe', {
+        src: isDev ? devSrc : prodSrc,
+        style: 'width: 100%; height: calc(100vh - 60px); border: none;',
+        frameborder: '0'
       })
-      window.dispatchEvent(new CustomEvent(`${appName}-loaded`))
-    } catch (error) {
-      console.error(`Failed to load ${appName} app:`, error)
     }
   }
 }
-
-// 마이크로프론트엔드 컨테이너 컴포넌트 생성 함수
-const createMfeContainer = (appName: string) => ({
-  template: `<div id="${appName}-container"></div>`
-})
 
 const router = createRouter({
   history: createWebHistory(isDev ? '/' : '/frontend-architecture/'),
@@ -59,22 +37,19 @@ const router = createRouter({
         {
           path: 'auth',
           name: 'auth',
-          component: createMfeContainer('auth'),
-          beforeEnter: () => loadRemoteApp('auth', 5001)
+          component: createMfeContainer('auth', 5001)
         },
         // 대시보드 마이크로프론트엔드
         {
           path: 'dashboard',
           name: 'dashboard',
-          component: createMfeContainer('dashboard'),
-          beforeEnter: () => loadRemoteApp('dashboard', 5002)
+          component: createMfeContainer('dashboard', 5002)
         },
         // 설정 마이크로프론트엔드
         {
           path: 'settings',
           name: 'settings',
-          component: createMfeContainer('settings'),
-          beforeEnter: () => loadRemoteApp('settings', 5003)
+          component: createMfeContainer('settings', 5003)
         },
         // 공통 UI 컴포넌트
         {

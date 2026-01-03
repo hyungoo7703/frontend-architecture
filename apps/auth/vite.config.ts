@@ -6,23 +6,10 @@ const isDev = process.env.NODE_ENV === 'development'
 const appName = 'auth'
 
 export default defineConfig({
-  base: isDev ? '/' : '/frontend-architecture/',
+  base: isDev ? '/' : '/frontend-architecture/auth/',
   plugins: [vue()],
   build: {
-    outDir: 'dist',
-    lib: {
-      entry: path.resolve(__dirname, 'src/main.ts'),
-      name: 'AuthApp',
-      fileName: () => 'auth.js'
-    },
-    rollupOptions: {
-      external: ['vue'],
-      output: {
-        globals: {
-          vue: 'Vue'
-        }
-      }
-    }
+    outDir: 'dist'
   },
   resolve: {
     alias: {
